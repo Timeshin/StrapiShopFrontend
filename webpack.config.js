@@ -15,11 +15,16 @@ module.exports = {
     alias: {
       '@/styles': path.resolve(__dirname, 'src/styles/'),
       '@/components': path.resolve(__dirname, 'src/components/'),
+      '@/actions': path.resolve(__dirname, 'src/redux/actions'),
+      '@/services': path.resolve(__dirname, 'src/services'),
+      '@/layouts': path.resolve(__dirname, 'src/layouts/'),
       '@/config': path.resolve(__dirname, 'src/config/'),
       '@/pages': path.resolve(__dirname, 'src/pages/'),
       '@/modules': path.resolve(__dirname, 'src/modules/'),
       '@/types': path.resolve(__dirname, 'src/types/'),
-      '@/hooks': path.resolve(__dirname, 'src/hooks/')
+      '@/hooks': path.resolve(__dirname, 'src/hooks/'),
+      '@/helpers': path.resolve(__dirname, 'src/helpers/'),
+      '@/store': path.resolve(__dirname, 'src/redux/')
     }
   },
   module: {

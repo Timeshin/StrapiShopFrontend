@@ -27,6 +27,7 @@
 	},
 	"plugins": ["react", "@typescript-eslint", "react-hooks", "unused-imports"],
 	"rules": {
+		"arrow-body-style": ["error", "as-needed"],
 		"unused-imports/no-unused-imports": "error",
 		"@typescript-eslint/no-unused-vars": "warn",
 		"@typescript-eslint/no-explicit-any": "error",

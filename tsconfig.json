@@ -6,11 +6,16 @@
     "paths": {
       "@/styles/*": ["src/styles/*"],
       "@/components": ["src/components"],
+      "@/layouts": ["src/layouts/"],
       "@/config/*": ["src/config/*"],
       "@/pages/*": ["src/pages/*"],
+      "@/store": ["src/redux"],
+      "@/services/*": ["src/services/*"],
+      "@/actions/*": ["src/redux/actions/*"],
       "@/modules/*": ["src/modules/*"],
       "@/types/*": ["src/types/*"],
-      "@/hooks/*": ["src/hooks/*"]
+      "@/hooks/*": ["src/hooks/*"],
+      "@/helpers/*": ["src/helpers/*"]
     },
     "lib": [
       "dom",
