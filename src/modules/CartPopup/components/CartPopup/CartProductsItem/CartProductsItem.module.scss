@@ -1,0 +1,12 @@
+.product {
+	height: fit-content;
+
+	button {
+		background: #d70808;
+		border: none;
+
+		&:hover {
+			background: #ae0606;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import TokenManager from '@/helpers/TokenManager'
-import { store } from '@/store'
-import { setUser } from '@/actions/userSlice.action'
+import { store } from '@/redux/index'
+import { setUser } from '@/redux/actions/userSlice.actions'
 import axios from 'axios'
 
 const withAuthorization = axios.create({
@@ -34,7 +34,7 @@ withAuthorization.interceptors.response.use(
 		}
 
 		if (err.response) {
-			if (err.response.data.status === 401) {
+			if (err.response.status === 401) {
 				TokenManager.deleteToken()
 				store.dispatch(setUser(null))
 			}

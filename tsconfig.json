@@ -9,7 +9,7 @@
       "@/layouts": ["src/layouts/"],
       "@/config/*": ["src/config/*"],
       "@/pages/*": ["src/pages/*"],
-      "@/store": ["src/redux"],
+      "@/redux/*": ["src/redux/*"],
       "@/services/*": ["src/services/*"],
       "@/actions/*": ["src/redux/actions/*"],
       "@/modules/*": ["src/modules/*"],

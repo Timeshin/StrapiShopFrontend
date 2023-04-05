@@ -1,45 +1,40 @@
-import { useEffect, useState } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
-import { setUser } from '@/actions/userSlice.action'
+import { useEffect } from 'react'
+import { Outlet, useMatch, useNavigate } from 'react-router-dom'
 import TokenManager from '@/helpers/TokenManager'
+import { getUser } from '@/redux/thunks/user.thunks'
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import UserService from '@/services/user.service'
 
 import { Loader } from '@/components'
 
-import classes from './AuthLayout.module.scss'
-
 const AuthLayout = () => {
-	const [isLoading, setIsLoading] = useState(false)
 	const naviagte = useNavigate()
 	const dispatch = useAppDispatch()
 	const isAuth = useAppSelector(({ authStore }) => authStore.isAuth)
+	const isAuthPage = useMatch('/auth')
+	const isLoading = useAppSelector(({ authStore }) => authStore.status.status === 'loading')
 	const jwtToken = TokenManager.getLocalAccessToken()
 
 	useEffect(() => {
-		if (isAuth) {
+		if (isAuth && !isAuthPage) return
+
+		if (isAuth && isAuthPage) {
 			naviagte('/', { replace: true })
 			return
 		}
 
-		if (jwtToken) {
-			setIsLoading(true)
-			UserService.getUser()
-				.then((user) => {
-					dispatch(setUser(user))
-				})
-				.finally(() => setIsLoading(false))
+		if (!jwtToken) {
+			naviagte('/auth', { replace: true })
 		}
 
-		naviagte('/auth', { replace: true })
-	}, [dispatch, isAuth, jwtToken, naviagte])
+		dispatch(getUser())
+	}, [dispatch, isAuth, isAuthPage, jwtToken, naviagte])
 
 	if (isLoading) return <Loader />
 
 	return (
-		<div className={classes.layout}>
+		<>
 			<Outlet />
-		</div>
+		</>
 	)
 }
 

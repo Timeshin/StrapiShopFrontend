@@ -24,7 +24,7 @@ module.exports = {
       '@/types': path.resolve(__dirname, 'src/types/'),
       '@/hooks': path.resolve(__dirname, 'src/hooks/'),
       '@/helpers': path.resolve(__dirname, 'src/helpers/'),
-      '@/store': path.resolve(__dirname, 'src/redux/')
+      '@/redux': path.resolve(__dirname, 'src/redux/')
     }
   },
   module: {
@@ -70,6 +70,15 @@ module.exports = {
     })
   ],
   devServer: {
+    proxy: {
+      '/uploads': {
+        target: 'http://localhost:1337',
+        changeOrigin: true,
+        headers: {
+          'X-Custom-Header': 'foobar'
+        }
+      }
+    },
     historyApiFallback: true,
     static: {
       directory: path.join(__dirname, 'public'),

@@ -2,12 +2,16 @@ import { FormEvent, useState } from 'react'
 import { FormTypes } from './AuthForm.types'
 import authFormData from './AuthForm.meta'
 import submitFormHandler from '@/helpers/submitFormHandler'
-import { IAuthDataResponse, ILoginDataRequest, IRegisterDataRequest } from '../../types/service/authService.types'
-import AuthService from '../../services/auth.service'
+import {
+	IAuthDataResponse,
+	ILoginDataRequest,
+	IRegisterDataRequest
+} from '../../../../types/services/authService.types'
+import AuthService from '@/services/auth.service'
 import TokenManager from '@/helpers/TokenManager'
 import { useAppDispatch } from '@/hooks/redux'
 import { IError, IStatus } from '@/types/common.types'
-import { setUser } from '@/actions/userSlice.action'
+import { setUser } from '@/redux/actions/userSlice.actions'
 import { AxiosError } from 'axios'
 
 import LoginForm from '../LoginForm/LoginForm'
@@ -17,14 +21,14 @@ import { Button } from '@/components'
 import classes from './AuthForm.module.scss'
 
 const AuthForm = () => {
-	const [{ status: statusValue, message }, setStatus] = useState<IStatus>({ status: 'initial' })
+	const [{ status: statusValue, message }, setStatus] = useState<IStatus>({ status: 'idle' })
 	const [formType, setFormType] = useState<FormTypes>(FormTypes.LoginStep)
 	const dispatch = useAppDispatch()
 	const isLoginForm = formType === FormTypes.LoginStep
 
 	const onChangeFormType = (type: FormTypes) => {
 		setFormType(type)
-		setStatus({ status: 'initial' })
+		setStatus({ status: 'idle' })
 	}
 
 	const handleSuccess = ({ jwt, user }: IAuthDataResponse) => {

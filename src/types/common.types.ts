@@ -1,5 +1,5 @@
 export interface IStatus {
-	status: 'error' | 'loading' | 'success' | 'initial'
+	status: 'error' | 'loading' | 'success' | 'idle'
 	message?: string[] | string
 }
 

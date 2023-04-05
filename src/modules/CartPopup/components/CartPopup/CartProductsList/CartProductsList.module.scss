@@ -1,0 +1,15 @@
+.content {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+
+	.clearButton {
+		border: 1px solid #d70808;
+		width: fit-content;
+
+		&:hover {
+			background: #d70808;
+		}
+	}
+}

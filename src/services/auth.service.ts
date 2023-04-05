@@ -1,9 +1,5 @@
 import fetchInstance from '@/config/fetchInstance.config'
-import {
-	ILoginDataRequest,
-	IAuthDataResponse,
-	IRegisterDataRequest
-} from '@/modules/AuthForm/types/service/authService.types'
+import { ILoginDataRequest, IAuthDataResponse, IRegisterDataRequest } from '@/types/services/authService.types'
 import { AxiosInstance } from 'axios'
 
 class AuthService {

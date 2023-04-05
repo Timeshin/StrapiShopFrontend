@@ -1,0 +1,19 @@
+.header {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 20px;
+
+	.leftSide {
+		display: flex;
+		align-items: center;
+		gap: 46px;
+
+		span {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+		}
+	}
+}
