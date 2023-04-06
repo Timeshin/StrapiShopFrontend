@@ -13,8 +13,8 @@ const initialState: InitialState = {
 	status: { status: 'idle' }
 }
 
-export const productsSlice = createSlice({
-	name: 'products',
+export const cartSlice = createSlice({
+	name: 'cart',
 	initialState,
 	reducers: {
 		setCartProducts: (state, { payload }: PayloadAction<IProduct[]>) => {
@@ -35,7 +35,7 @@ export const productsSlice = createSlice({
 	}
 })
 
-const { reducer, actions } = productsSlice
+const { reducer, actions } = cartSlice
 
 export const { setCartProducts } = actions
 

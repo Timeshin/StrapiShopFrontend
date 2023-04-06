@@ -1,7 +1,8 @@
 import { useAppDispatch, useAppSelector } from '@/hooks/redux'
-import { useEffect } from 'react'
-import { getProducts } from '../../redux/products.thunks'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ProductsService from '@/services/products.service'
+import { connectToSocket, setProducts } from '../../redux/productsSlice.actions'
 
 import { Loader, Product, Button } from '@/components'
 
@@ -10,14 +11,26 @@ import classes from './ProductsList.module.scss'
 const ProductsList = () => {
 	const navigate = useNavigate()
 	const dispatch = useAppDispatch()
-	const isLoading = useAppSelector(({ productsStore }) => productsStore.status.status === 'loading')
-	const isError = useAppSelector(({ productsStore }) => productsStore.status.status === 'error')
+	const [isLoading, setIsLoading] = useState(false)
+	const [isError, setIsError] = useState(false)
 	const products = useAppSelector(({ productsStore }) => productsStore.products)
 
 	useEffect(() => {
 		if (products?.length) return
+		setIsLoading(true)
 
-		dispatch(getProducts())
+		ProductsService.getProducts()
+			.then((products) => {
+				dispatch(setProducts(products))
+				setIsError(false)
+			})
+			.catch(() => {
+				setIsError(true)
+			})
+			.finally(() => {
+				setIsLoading(false)
+				dispatch(connectToSocket())
+			})
 	}, [dispatch, products?.length])
 
 	const onNavigateProductPageHandler = (id: number) => {

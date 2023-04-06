@@ -1,3 +1,3 @@
-import { setProducts } from './products.slice'
+import { setProducts, connectToSocket } from './products.slice'
 
-export { setProducts }
+export { setProducts, connectToSocket }

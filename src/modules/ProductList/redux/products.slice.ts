@@ -1,16 +1,14 @@
-import { IStatus } from '@/types/common.types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IProduct } from '../../../types/services/productsService.types'
-import { getProducts } from './products.thunks'
 
 interface InitialState {
 	products: IProduct[] | null
-	status: IStatus
+	isConnectedToSocket: boolean
 }
 
 const initialState: InitialState = {
 	products: null,
-	status: { status: 'idle' }
+	isConnectedToSocket: false
 }
 
 export const productsSlice = createSlice({
@@ -19,24 +17,15 @@ export const productsSlice = createSlice({
 	reducers: {
 		setProducts: (state, action: PayloadAction<IProduct[] | null>) => {
 			state.products = action.payload
+		},
+		connectToSocket: (state) => {
+			state.isConnectedToSocket = true
 		}
-	},
-	extraReducers: (builder) => {
-		builder.addCase(getProducts.pending, (state) => {
-			state.status = { status: 'loading' }
-		}),
-			builder.addCase(getProducts.fulfilled, (state, { payload }) => {
-				state.products = payload
-				state.status = { status: 'success' }
-			}),
-			builder.addCase(getProducts.rejected, (state) => {
-				state.status = { status: 'error' }
-			})
 	}
 })
 
 const { actions, reducer } = productsSlice
 
-export const { setProducts } = actions
+export const { setProducts, connectToSocket } = actions
 
 export default reducer
