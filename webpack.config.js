@@ -86,11 +86,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/uploads': {
-        target: 'http://localhost:1337',
-        changeOrigin: true,
-        headers: {
-          'X-Custom-Header': 'foobar'
-        }
+        target: 'http://localhost:1337'
       }
     },
     historyApiFallback: true,
