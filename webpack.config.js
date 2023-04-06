@@ -1,6 +1,8 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { GenerateSW } = require('workbox-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
@@ -67,6 +69,18 @@ module.exports = {
     }),
     new Dotenv({
       path: `.env.${process.env.NODE_ENV}`
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+          { from: 'public/manifest.json', to: 'manifest.json' },
+          { from: 'public/logo192.png', to: 'logo192.png' },
+          { from: 'public/logo512.png', to: 'logo512.png' }
+      ]
+    }),
+    new GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+      maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
     })
   ],
   devServer: {
